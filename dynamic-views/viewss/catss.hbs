@@ -1,0 +1,33 @@
+<h1>this is cats page</h1>
+
+<div>
+<h2>All Cats</h2>
+
+<ul>
+    {{#each allTheCats}}
+{{!-- inside the each loop, whatever html you write will happen --}}
+{{!-- one time for every element in the array --}}
+{{!-- since i want 6 <li> tags each with some cat info i will put an  --}}
+{{!-- <li> tag with some cat info inside the loop --}}
+   
+    <li>
+        <hr>
+        {{!-- this is a magical word inside the each loop --}}
+        {{!-- it stands for each individual object in the array --}}
+        <a href="/cats/{{this.id}}"><h4>{{this.name}}</h4></a>
+        {{#if this.fatCat}}
+        <h6>Certified FatCat</h6>
+        {{/if}}
+        {{#if this.indoor}}
+        <h6>Indoor Kitty Cat</h6>
+        {{else}}
+        <h6>Outdoor Cat</h6>
+        {{/if}}
+        <img src={{this.image}} style="width: 50px">
+        <hr>
+    </li>
+    {{/each}}
+</ul>
+
+
+</div>
