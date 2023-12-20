@@ -1,0 +1,103 @@
+body{
+    margin:0;
+    font-family: arial;
+    font-size: 16.5px;
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid lightgrey;
+    padding: 10px;
+}
+
+#search-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#nav-list{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    align-items: center;
+    padding-left: 20px;
+}
+
+#nav-list li{
+    padding-right: 20px;
+    color: grey;
+}
+
+#logo{
+    width: 190px;
+}
+
+#magnifying-glass{
+    width: 20px;
+    position: absolute;
+}
+
+#search{
+    padding: 10px 0px 10px 25px;
+    border: none;
+    font-size:15px;
+}
+
+
+
+#search-bar{
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    margin: 0px 5px 0px 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left:10px;
+    width: 12.5vw;
+}
+
+
+#nav-buttons{
+    font-size: 18px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+#nav-buttons a{
+    margin-right: 10px;
+    text-decoration: none;
+    color: #ff6154;
+}
+
+#sign-in{
+    padding: 10px;
+    font-size: .9em;
+    border: none;
+    background-color: white;
+    width: 75px;
+}
+
+#sign-up{
+    margin-left: 10px;
+    padding: 12px 18px;
+    font-size: .75em;
+    border: 1px solid #ff6154;
+    background-color: #ff6154;
+    color: white;
+    border-radius: 5px;
+    width: 88px;
+} 
+
+
+@media screen and (max-width: 1300px) {
+    #how-post{
+        visibility: hidden;
+        position: absolute;
+    }
+  }
