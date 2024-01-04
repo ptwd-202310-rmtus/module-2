@@ -25,6 +25,8 @@ mongoose
 
 // let newCar = new Car({company: "Toyota", model: "Prius"});
 
+
+
 // newCar.save()
 // .then(()=>{
 //     console.log("success");
@@ -44,6 +46,21 @@ mongoose
 // .then((err)=>{
 //     console.log(err);
 // })
+
+// async version
+
+// async function createACar(){
+//   try{
+//     let theCar = await Car.find({company: "Toyota"})
+//     console.log(theCar);
+//   } catch(err){
+//     console.log(err);
+//   }
+
+// }
+// Car.createACar();
+
+// async version
 
 
 
