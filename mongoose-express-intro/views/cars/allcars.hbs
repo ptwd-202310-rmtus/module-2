@@ -1,0 +1,14 @@
+<h1>All Cars</h1>
+
+
+{{#each cars}}
+    <div>
+        <hr>
+        <a href="/cars/{{this._id}}">
+            <h3>{{this.company}} {{this.model}}</h3>
+        </a>
+        <h4>{{this.bodyType}}</h4>
+        <img src="{{this.picture}}" style="width: 200px">
+        <hr>
+    </div>
+{{/each}}
