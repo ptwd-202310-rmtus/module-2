@@ -33,7 +33,8 @@ const authorsRoutes = require("./routes/authors.routes");
 app.use("/authors", authorsRoutes);
 // /authors will now be prefixed to all the routes in the authors routes file
 
-
+const booksRoutes = require("./routes/books.routes");
+app.use("/books", booksRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

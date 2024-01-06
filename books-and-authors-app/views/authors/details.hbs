@@ -3,14 +3,27 @@
 
 <hr>
 <div>
-    <h3>{{name}}</h3>
-    <h6>Born on {{birthdate}} in {{hometown}}</h6>
+    <h3>{{theAuthor.name}}</h3>
+    <h6>Born on {{theAuthor.birthdate}} in {{theAuthor.hometown}}</h6>
 
-    <img src="{{image}}" style="height: 150px">
+    <img src="{{theAuthor.image}}" style="height: 150px">
 
-    <a href="/authors/edit/{{_id}}">Edit This Author</a>
+    {{#if theBooks}}
+    <hr>
+    <h3>Books by this author</h3>
+    {{#each theBooks}}
+    <div>
+        <h4>{{this.title}}</h4>
+    </div>
 
-    <form action="/authors/delete/{{_id}}"  method="post">
+    {{/each}}
+    <hr>
+    {{/if}}
+
+
+    <a href="/authors/edit/{{theAuthor._id}}">Edit This Author</a>
+
+    <form action="/authors/delete/{{theAuthor._id}}"  method="post">
         <button type="submit">Delete Author</button>
     </form>
 </div>

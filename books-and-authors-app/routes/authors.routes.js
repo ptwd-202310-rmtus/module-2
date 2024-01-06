@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Author = require("../models/Author.model");
+const Book = require("../models/Book.model");
 
 /* GET home page */
 // this route is actually /authors because we pre fixed all the routes in this file
@@ -37,14 +38,14 @@ router.get("/", (req, res, next) => {
   })
 
 
-  router.get("/:theID", (req, res, next) => {
-    Author.findById(req.params.theID)
-    .then((theAuthor)=>{
-      res.render("authors/details", theAuthor);
-    })
-    .catch((err)=>{
+  router.get("/:theID", async (req, res, next) => {
+    try{
+      let theAuthor = await Author.findById(req.params.theID);
+      let theBooks = await Book.find({author: req.params.theID})
+      res.render("authors/details", {theAuthor, theBooks});
+    } catch (err){
       next(err);
-    })
+    }
   });
 
 
