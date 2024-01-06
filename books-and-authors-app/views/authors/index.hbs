@@ -1,0 +1,15 @@
+<h1>Authors Page</h1>
+
+
+{{#each authors}}
+<hr>
+<div>
+    <a href="/authors/{{this._id}}">
+        <h3>{{this.name}}</h3>
+    </a>
+    <h6>Born on {{this.birthdate}} in {{this.hometown}}</h6>
+
+    <img src="{{this.image}}" style="height: 150px">
+</div>
+<hr>
+{{/each}}

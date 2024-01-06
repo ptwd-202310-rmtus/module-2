@@ -1,0 +1,17 @@
+<h1>Author Details Page</h1>
+
+
+<hr>
+<div>
+    <h3>{{name}}</h3>
+    <h6>Born on {{birthdate}} in {{hometown}}</h6>
+
+    <img src="{{image}}" style="height: 150px">
+
+    <a href="/authors/edit/{{_id}}">Edit This Author</a>
+
+    <form action="/authors/delete/{{_id}}"  method="post">
+        <button type="submit">Delete Author</button>
+    </form>
+</div>
+<hr>
