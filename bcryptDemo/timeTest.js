@@ -1,5 +1,3 @@
-// bcryptDemo/timeTest.js
-
 const bcrypt = require("bcryptjs");
 const plainPassword1 = "HelloWorld";
 
