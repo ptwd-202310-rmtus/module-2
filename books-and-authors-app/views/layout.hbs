@@ -10,10 +10,25 @@
    </head>
 
    <body>
+      <a href="/signup">Signup</a>
+      {{#unless theUser}}
+      <a href="/login">Login</a>
+      {{/unless}}
       <a href="/authors">See Authors</a>
       <a href="/authors/new">Create Author</a>
       <a href="/books/new">Create Book</a>
       <a href="/books">See Books</a>
+
+      {{#if theUser}}
+      <form action="/logout" method="post">
+         <button>Logout</button>
+      </form>
+      {{/if}}
+
+
+      {{#if theUser}}
+      <h3>Welcome, {{theUser.username}}</h3>
+      {{/if}}
       
 
       {{{body}}}

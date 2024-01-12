@@ -6,6 +6,9 @@ const Book = require("../models/Book.model");
 /* GET home page */
 // this route is actually /authors because we pre fixed all the routes in this file
 router.get("/", (req, res, next) => {
+  if(!req.session.currentUser){
+    res.redirect("/login");
+  }
   Author.find()
   .then((allAuthors)=>{
     res.render("authors/index", {authors: allAuthors});
@@ -18,6 +21,9 @@ router.get("/", (req, res, next) => {
 
 
   router.get("/new", (req, res, next)=>{
+    if(!req.session.currentUser){
+      res.redirect("/login");
+    }
     res.render("authors/new");
   });
 
