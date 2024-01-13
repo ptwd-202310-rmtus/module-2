@@ -3,6 +3,7 @@ const router = express.Router();
 const Book = require("../models/Book.model");
 const Author = require("../models/Author.model");
 const guardRoute = require("../utils/guardroute");
+const bannedUser = require("../utils/banneduser");
 
 
 /* GET home page */
@@ -43,7 +44,7 @@ router.post("/create", guardRoute, async (req, res, next)=>{
 })
 
 
-router.get("/", (req, res, next)=>{
+router.get("/", bannedUser, (req, res, next)=>{
     console.log(req.session);
     Book.find()
     .then((theBooks)=>{
@@ -58,14 +59,13 @@ router.get("/", (req, res, next)=>{
 router.get("/:id", (req, res, next)=>{
     Book.findById(req.params.id).populate("authors").populate("donor")
     .then((theBook)=>{
-        const selfOwned = theBook.donor.equals(req.session.currentUser._id)
-        
-        res.render("books/details", {theBook, selfOwned})
+        const deleteable = theBook.donor.equals(req.session.currentUser._id) || req.session.currentUser.role === "admin";
+        res.render("books/details", {theBook, deleteable})
     })
     .catch((err)=>{
         next(err);
     })
-})
+});
 
 
 // router.get("/edit/:id", async (req, res, next)=>{

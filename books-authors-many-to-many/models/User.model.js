@@ -21,12 +21,15 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true
+    },
+    role: {
+      type: String,
+      enum: ["regular", "admin", "banned"]
     }
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
-    timestamps: true
-  }
+    timestamps: true,
+  },
 );
 
 const User = model("User", userSchema);

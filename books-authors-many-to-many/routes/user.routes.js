@@ -18,7 +18,8 @@ router.post("/signup", async (req, res, next)=>{
         const newUser = await User.create({
             username: username,
             email: email,
-            password: hashedPassword
+            password: hashedPassword,
+            role: "regular"
         })
 
         res.redirect("/");
@@ -61,7 +62,12 @@ router.post("/login", (req, res, next)=>{
         res.redirect("/login");
         return;
       } else if (bcryptjs.compareSync(password, user.password)) {
-        req.session.currentUser = {username: user.username, email: user.email, _id: user._id};
+        req.session.currentUser = {
+          username: user.username,
+           email: user.email,
+            _id: user._id,
+            role: user.role
+          };
         req.flash("successMessage", "Sucessfully Logged in")
         res.redirect("/");
       } else {

@@ -21,10 +21,11 @@
 
     
 
-    {{#if selfOwned}}
+    {{#if deleteable}}
     <form action="/books/{{theBook._id}}/delete" method="post">
         <button>Delete This Book</button>
     </form>
     {{/if}}
+    
 </div>
 <hr>
