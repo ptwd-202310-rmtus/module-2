@@ -17,22 +17,29 @@ router.get("/new", guardRoute, (req, res, next) => {
   })
 });
 
-router.post("/create", guardRoute, (req, res, next)=>{
-    Book.create({
+router.post("/create", guardRoute, async (req, res, next)=>{
+    try{
+    const theBook = await Book.create({
         title: req.body.theTitle,
         year: req.body.theYear,
         image: req.body.theImage,
-        author: req.body.theAuthor,
-        donor: req.session.currentUser._id,
-    })
-    .then((result)=>{
+        authors: req.body.theAuthors,
+        donor: req.session.currentUser._id});
+
+        authorUpdate = await Author.updateMany(
+            { _id: { $in: req.body.theAuthors } },
+            { $push: { books : theBook} },
+            {multi: true}
+         )
+    
         req.flash("successMessage", "Book successfully added to the database.  Thank you for your contribution");
         res.redirect("/books");
-    })
-    .catch((err)=>{
-        req.flash("errorMessage", "Sorry, something went wrong "+err);
-        res.redirect("/books/new");
-    })
+} catch(err){
+    
+    req.flash("errorMessage", "Sorry, something went wrong "+err);
+    res.redirect("/books/new");
+}
+  
 })
 
 
@@ -49,7 +56,7 @@ router.get("/", (req, res, next)=>{
 
 
 router.get("/:id", (req, res, next)=>{
-    Book.findById(req.params.id).populate("author").populate("donor")
+    Book.findById(req.params.id).populate("authors").populate("donor")
     .then((theBook)=>{
         const selfOwned = theBook.donor.equals(req.session.currentUser._id)
         
@@ -82,14 +89,21 @@ router.post("/:id/delete", guardRoute, async (req, res, next)=>{
         return;
     }
 
+    try{
 
-    Book.findByIdAndDelete(req.params.id)
-    .then(()=>{
-        res.redirect("/")
-    })
-    .catch((err)=>{
+        const book = await Book.findByIdAndDelete(req.params.id);
+        const authorUpdate = await Author.updateMany(
+            { _id: { $in: theBook.authors } },
+            { $pull: { books : theBook._id} },
+            {multi: true}
+         )
+        
+         res.redirect("/books");
+        
+    } catch(err){
         next(err);
-    })
+    }
+  
 
 })
 

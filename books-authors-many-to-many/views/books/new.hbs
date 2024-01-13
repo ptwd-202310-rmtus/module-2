@@ -1,0 +1,26 @@
+<h1>Add a Book to the DB</h1>
+
+
+<form action="/books/create" method="post">
+
+<label>Title</label>
+<input type="text" name="theTitle">
+
+<label>Year</label>
+<input type="text" name="theYear">
+
+<label>Image</label>
+<input type="text" name="theImage">
+
+<label>Author:</label>
+<select name="theAuthors" multiple>
+    {{#each allAuthors}}
+    <option value="{{this._id}}">{{this.name}}</option>
+    {{/each}}
+</select>
+
+
+
+
+    <button>Save</button>
+</form>

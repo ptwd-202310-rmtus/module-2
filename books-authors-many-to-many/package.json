@@ -1,5 +1,5 @@
 {
-  "name": "books-and-authors-app",
+  "name": "books-authors-many-to-many",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -18,8 +18,5 @@
     "mongoose": "^8.0.3",
     "morgan": "^1.10.0",
     "serve-favicon": "^2.5.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.2"
   }
 }

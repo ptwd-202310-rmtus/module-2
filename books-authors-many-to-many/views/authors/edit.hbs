@@ -1,0 +1,23 @@
+
+<h1>Editing {{name}}</h1>
+
+
+<form action="/authors/update/{{_id}}" method="post">
+
+    <label>Name</label>
+    <input type="text" name="theName" value="{{name}}">
+
+    <label>Birthdate</label>
+    <input type="text" name="theBirthdate" value="{{birthdate}}">
+
+    <label>Hometown</label>
+    <input type="text" name="theHometown" value="{{hometown}}">
+
+    <label>Image</label>
+    <input type="text" name="theImage" value="{{image}}">
+
+
+
+
+    <button>Save Changes</button>
+</form>

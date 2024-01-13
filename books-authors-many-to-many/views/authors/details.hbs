@@ -1,0 +1,32 @@
+<h1>Author Details Page</h1>
+
+
+<hr>
+<div>
+    <h3>{{theAuthor.name}}</h3>
+    <h6>Born on {{theAuthor.birthdate}} in {{theAuthor.hometown}}</h6>
+
+    <img src="{{theAuthor.image}}" style="height: 150px">
+
+    {{#if theAuthor.books}}
+    <hr>
+    <h3>Books by this author</h3>
+    {{#each theAuthor.books}}
+    <div>
+        <a href="/books/{{this._id}}">
+        <h4>{{this.title}}</h4>
+        </a>
+    </div>
+
+    {{/each}}
+    <hr>
+    {{/if}}
+
+
+    <a href="/authors/edit/{{theAuthor._id}}">Edit This Author</a>
+
+    <form action="/authors/delete/{{theAuthor._id}}"  method="post">
+        <button type="submit">Delete Author</button>
+    </form>
+</div>
+<hr>

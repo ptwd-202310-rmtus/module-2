@@ -1,0 +1,16 @@
+<h1>All Books</h1>
+
+
+
+{{#each books}}
+<hr>
+<div>
+    <a href="/books/{{this._id}}">
+        <h3>{{this.title}}</h3>
+    </a>
+    <h6>Written in {{this.year}}</h6>
+
+    <img src="{{this.image}}" style="height: 150px">
+</div>
+<hr>
+{{/each}}

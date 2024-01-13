@@ -1,0 +1,30 @@
+<h1>Book Details</h1>
+
+
+<hr>
+<div>
+    <h2>{{theBook.title}}</h2>
+    <h3>By 
+        {{#each theBook.authors}}
+        <a href="/authors/{{this._id}}">
+        <span>{{this.name}},</span>
+        </a>
+        {{/each}}
+    </h3>
+    </a>
+    <h6>Written in {{theBook.year}}</h6>
+
+    <p>Donated by: {{theBook.donor.username}}</p>
+
+
+    <img src="{{theBook.image}}" style="height: 150px">
+
+    
+
+    {{#if selfOwned}}
+    <form action="/books/{{theBook._id}}/delete" method="post">
+        <button>Delete This Book</button>
+    </form>
+    {{/if}}
+</div>
+<hr>
