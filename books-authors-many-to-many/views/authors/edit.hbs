@@ -2,7 +2,7 @@
 <h1>Editing {{name}}</h1>
 
 
-<form action="/authors/update/{{_id}}" method="post">
+<form action="/authors/update/{{_id}}" method="post" enctype="multipart/form-data">
 
     <label>Name</label>
     <input type="text" name="theName" value="{{name}}">
@@ -13,8 +13,21 @@
     <label>Hometown</label>
     <input type="text" name="theHometown" value="{{hometown}}">
 
+
+    {{#if image}}
+    <div id="img-preview-author">
+    <img src="{{image}}" style="width: 100px">
+    <button type="button" id="image-edit-author">click here to edit image</button>
+    </div>
+    {{/if}}
+
+   
+
+   <div id="img-author-edit-div">
     <label>Image</label>
-    <input type="text" name="theImage" value="{{image}}">
+    <input type="file" name="theImage">
+   </div>
+ 
 
 
 

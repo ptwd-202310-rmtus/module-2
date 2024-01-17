@@ -4,6 +4,7 @@ const Book = require("../models/Book.model");
 const Author = require("../models/Author.model");
 const guardRoute = require("../utils/guardroute");
 const bannedUser = require("../utils/banneduser");
+const uploadThingy = require("../config/cloud");
 
 
 /* GET home page */
@@ -18,12 +19,13 @@ router.get("/new", guardRoute, (req, res, next) => {
   })
 });
 
-router.post("/create", guardRoute, async (req, res, next)=>{
+router.post("/create", guardRoute, uploadThingy.single("theImage"), async (req, res, next)=>{
     try{
+    
     const theBook = await Book.create({
         title: req.body.theTitle,
         year: req.body.theYear,
-        image: req.body.theImage,
+        image: req.file.path,
         authors: req.body.theAuthors,
         donor: req.session.currentUser._id});
 

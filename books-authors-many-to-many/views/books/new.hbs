@@ -1,7 +1,7 @@
 <h1>Add a Book to the DB</h1>
 
 
-<form action="/books/create" method="post">
+<form action="/books/create" method="post" enctype="multipart/form-data">
 
 <label>Title</label>
 <input type="text" name="theTitle">
@@ -10,7 +10,7 @@
 <input type="text" name="theYear">
 
 <label>Image</label>
-<input type="text" name="theImage">
+<input type="file" name="theImage">
 
 <label>Author:</label>
 <select name="theAuthors" multiple>

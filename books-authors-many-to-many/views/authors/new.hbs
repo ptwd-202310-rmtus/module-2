@@ -1,7 +1,7 @@
 <h1>Add an Author to the DB</h1>
 
 
-<form action="/authors/create" method="post">
+<form action="/authors/create" method="post" enctype="multipart/form-data">
 
 <label>Name</label>
 <input type="text" name="name">
@@ -13,7 +13,7 @@
 <input type="text" name="hometown">
 
 <label>Image</label>
-<input type="text" name="image">
+<input type="file" name="image">
 
 
     <button type="submit">

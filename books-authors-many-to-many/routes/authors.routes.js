@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Author = require("../models/Author.model");
 const Book = require("../models/Book.model");
+const uploadThingy = require("../config/cloud");
 
 /* GET home page */
 // this route is actually /authors because we pre fixed all the routes in this file
@@ -27,12 +28,12 @@ router.get("/", (req, res, next) => {
     res.render("authors/new");
   });
 
-  router.post("/create", (req, res, next)=>{
+  router.post("/create", uploadThingy.single("image"), (req, res, next)=>{
     Author.create({
         name: req.body.name,
         hometown: req.body.hometown,
         birthdate: req.body.birthdate, 
-        image: req.body.image
+        image: req.file.path
         })
     .then((result)=>{
         res.redirect("/authors");
@@ -69,6 +70,7 @@ router.get("/", (req, res, next) => {
   router.get("/edit/:id", (req, res, next)=>{
     Author.findById(req.params.id)
     .then((theAuthor)=>{
+      console.log(theAuthor);
         res.render("authors/edit", theAuthor);
     })
     .catch((err)=>{
@@ -77,14 +79,19 @@ router.get("/", (req, res, next) => {
   })
 
 
-  router.post("/update/:id", (req, res, next)=>{
-    const {theName, theBirthdate, theHometown, theImage} = req.body;
-    Author.findByIdAndUpdate(req.params.id, {
-        name: theName,
-        birthdate: theBirthdate,
-        hometown: theHometown,
-        image: theImage
-    })
+  router.post("/update/:id", uploadThingy.single("theImage"), (req, res, next)=>{
+    const {theName, theBirthdate, theHometown} = req.body;
+
+    let theUpdate = {
+      name: theName,
+      birthdate: theBirthdate,
+      hometown: theHometown,
+    }
+    if(req.file){
+      theUpdate.image = req.file.path
+    }
+    
+    Author.findByIdAndUpdate(req.params.id, theUpdate)
     .then((result)=>{
         res.redirect("/authors/"+req.params.id)
     })

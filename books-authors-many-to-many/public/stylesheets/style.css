@@ -10,3 +10,8 @@ a {
 h1 {
   color: 15px;
 }
+
+
+#img-author-edit-div{
+  visibility: hidden;
+}
