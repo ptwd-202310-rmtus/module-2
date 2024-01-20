@@ -3,7 +3,16 @@
 
 <hr>
 <div>
-    <h2>{{theBook.title}}</h2>
+    <h2>
+        <span id="edit-title-input" data-theid="{{theBook._id}}">
+            <input  type="text" value="{{theBook.title}}">
+            <button id="submit-title">Submit</button>
+            <button id="cancel-title">Cancel</button>
+        </span>
+         <span id="the-title">{{theBook.title}}</span>
+         <button id="edit-title">edit</button>
+    </h2>
+
     <h3>By 
         {{#each theBook.authors}}
         <a href="/authors/{{this._id}}">
@@ -12,7 +21,17 @@
         {{/each}}
     </h3>
     </a>
-    <h6>Written in {{theBook.year}}</h6>
+
+    <h6>
+        Written in 
+        <span id="edit-year-input" data-theid="{{theBook._id}}"> 
+            <input type="text" value="{{theBook.year}}"> 
+            <button id="submit-year">Submit</button> 
+            <button id="cancel-year">Cancel</button>
+        </span>
+        <span id="the-year">{{theBook.year}}</span> 
+        <button id="edit-year">edit</button>
+    </h6>
 
     <p>Donated by: {{theBook.donor.username}}</p>
 
@@ -29,3 +48,6 @@
     
 </div>
 <hr>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"></script>
+<script src="/js/editbook.js"></script>

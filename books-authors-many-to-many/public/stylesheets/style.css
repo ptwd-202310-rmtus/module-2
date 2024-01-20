@@ -15,3 +15,16 @@ h1 {
 #img-author-edit-div{
   visibility: hidden;
 }
+
+#edit-title-input{
+  display: none;
+}
+
+#edit-year-input{
+  display: none;
+}
+
+
+#book-id{
+  display: none;
+}

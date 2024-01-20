@@ -4,7 +4,6 @@ const Book = require("../models/Book.model");
 const Author = require("../models/Author.model");
 const guardRoute = require("../utils/guardroute");
 const bannedUser = require("../utils/banneduser");
-const uploadThingy = require("../config/cloud");
 
 
 /* GET home page */
@@ -19,13 +18,13 @@ router.get("/new", guardRoute, (req, res, next) => {
   })
 });
 
-router.post("/create", guardRoute, uploadThingy.single("theImage"), async (req, res, next)=>{
+router.post("/create", guardRoute, async (req, res, next)=>{
     try{
     
     const theBook = await Book.create({
         title: req.body.theTitle,
         year: req.body.theYear,
-        image: req.file.path,
+        image: req.body.theImage,
         authors: req.body.theAuthors,
         donor: req.session.currentUser._id});
 
@@ -70,17 +69,6 @@ router.get("/:id", (req, res, next)=>{
 });
 
 
-// router.get("/edit/:id", async (req, res, next)=>{
-//     try{
-//         const theBook = await Book.findById(req.params.id);
-//         const allAuthors = await Author.find();
-//         res.render("some-page-that-I-dont-have", {theBook, allAuthor})
-//     } catch (err) {
-//         next(err);
-//     }
-//   })
-
-
 router.post("/:id/delete", guardRoute, async (req, res, next)=>{
    
 
@@ -105,8 +93,38 @@ router.post("/:id/delete", guardRoute, async (req, res, next)=>{
     } catch(err){
         next(err);
     }
-  
+});
 
+
+router.post("/api/edit/:theID", (req, res, next)=>{
+    const theUpdate = {};
+    const {title, year, image} = req.body;
+    if(title) theUpdate.title = title;
+    if(year) theUpdate.year = year;
+    if(image) theUpdate.image = image;
+
+    Book.findByIdAndUpdate(
+        req.params.theID,
+        theUpdate, 
+        {new: true}
+    ).then((response)=>{
+        res.json(response);
+    })
+    .catch((err)=>{
+        next(err);
+    })
 })
+
+// router.get("/api/details/:id", (req, res, next)=>{
+//     Book.findById(req.params.id)
+//     .then((thebook)=>{
+//         res.json({book: thebook});
+//     })
+//     .catch((err)=>{
+//         res.json({error:err});
+//     })
+// });
+
+
 
 module.exports = router;
